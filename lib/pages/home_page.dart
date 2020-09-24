@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_locale/routes/route_names.dart';
+import 'package:flutter_locale/widgets/drawer_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,12 +14,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),
-        leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.pushNamed(context, settingsPage);
-            }),
+        // leading: IconButton(
+        //     icon: Icon(Icons.menu),
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, settingsPage);
+        //     }),
       ),
+      drawer: DrawerList(),
       body: Center(
         child: Text(
           'Flutter Locale',
