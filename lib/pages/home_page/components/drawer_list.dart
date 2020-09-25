@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_locale/localization/constants.dart';
 import 'package:flutter_locale/routes/route_names.dart';
 
 class DrawerList extends StatefulWidget {
@@ -54,35 +55,17 @@ class _DrawerListState extends State<DrawerList> {
                   ),
                 ),
                 Text(
-                  'User Name',
+                  getTranslated(context, 'name'),
                   style: _textStyle,
                 ),
               ],
             ),
-            // DrawerHeader(
-            //     padding: EdgeInsets.only(bottom: 14.0),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       // mainAxisAlignment: MainAxisAlignment.start,
-            //       children: [
-            //         Container(
-            //           width: 150.0,
-            //           height: 150.0,
-            //           decoration: BoxDecoration(
-            //             shape: BoxShape.circle,
-            //             image: DecorationImage(
-            //               fit: BoxFit.fill,
-            //               image: AssetImage('assets/images/user.png'),
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     )),
             SizedBox(height: 20),
-            buildListTile('About', Icons.info, () {
+            buildListTile(getTranslated(context, 'about_us'), Icons.info, () {
               Navigator.popAndPushNamed(context, aboutRoute);
             }),
-            buildListTile('Settings', Icons.settings, () {
+            buildListTile(getTranslated(context, 'settings'), Icons.settings,
+                () {
               Navigator.popAndPushNamed(context, settingsPage);
             })
           ],
@@ -91,52 +74,3 @@ class _DrawerListState extends State<DrawerList> {
     );
   }
 }
-
-// Container _drawerList(BuildContext context) {
-//   TextStyle _textStyle = TextStyle(
-//     color: Colors.white,
-//     fontSize: 24,
-//   );
-//   return Container(
-//     color: Theme.of(context).primaryColor,
-//     child: ListView(
-//       padding: EdgeInsets.zero,
-//       children: [
-//         DrawerHeader(
-//           child: Container(
-//             height: 100,
-//             child: CircleAvatar(),
-//           ),
-//         ),
-//         ListTile(
-//           leading: Icon(
-//             Icons.info,
-//             color: Colors.white,
-//             size: 30,
-//           ),
-//           title: Text(
-//             'About',
-//             style: _textStyle,
-//           ),
-//           onTap: () {
-//             Navigator.popAndPushNamed(context, aboutRoute);
-//           },
-//         ),
-//         ListTile(
-//           leading: Icon(
-//             Icons.settings,
-//             color: Colors.white,
-//             size: 30,
-//           ),
-//           title: Text(
-//             'Settings',
-//             style: _textStyle,
-//           ),
-//           onTap: () {
-//             Navigator.popAndPushNamed(context, settingsPage);
-//           },
-//         ),
-//       ],
-//     ),
-//   );
-// }

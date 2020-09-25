@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 
-class MainForm extends StatefulWidget {
-  final Key formKey;
+import 'package:flutter_locale/localization/constants.dart';
 
-  MainForm({Key key, @required this.formKey});
+class MainForm extends StatefulWidget {
+  MainForm({Key key}) : super(key: key);
 
   @override
   _MainFormState createState() => _MainFormState();
@@ -17,7 +18,7 @@ class _MainFormState extends State<MainForm> {
   String email;
   DateTime _selectedDate;
 
-  void _showsuccessDialog() {
+  void _openTimePicker() {
     showTimePicker(context: context, initialTime: TimeOfDay.now());
   }
 
@@ -33,7 +34,7 @@ class _MainFormState extends State<MainForm> {
               Container(
                 height: MediaQuery.of(context).size.height / 5,
                 child: Text(
-                  'Add Information',
+                  getTranslated(context, 'add_information'),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 28,
@@ -51,7 +52,7 @@ class _MainFormState extends State<MainForm> {
                     borderRadius: BorderRadius.circular(24),
                   ),
                   labelText: _selectedDate == null
-                      ? 'Enter date of birth'
+                      ? getTranslated(context, 'date_of_birth')
                       : (DateFormat.yMd().format(_selectedDate)),
                   hintText: 'Select date of birth',
                 ),
@@ -81,12 +82,12 @@ class _MainFormState extends State<MainForm> {
                 color: Theme.of(context).primaryColor,
                 onPressed: () {
                   if (_key.currentState.validate()) {
-                    _showsuccessDialog();
+                    _openTimePicker();
                   }
                 },
                 child: Center(
                   child: Text(
-                    'Proceed',
+                    getTranslated(context, 'proceed'),
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -105,7 +106,7 @@ class _MainFormState extends State<MainForm> {
     return TextFormField(
       validator: (val) {
         if (val.isEmpty) {
-          return 'Email can\'t be blank';
+          return getTranslated(context, 'required_field');
         }
         return null;
       },
@@ -113,8 +114,8 @@ class _MainFormState extends State<MainForm> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        labelText: 'E-mail',
-        hintText: 'Enter your email',
+        labelText: getTranslated(context, 'email'),
+        hintText: getTranslated(context, 'email_hint'),
       ),
     );
   }
@@ -123,7 +124,7 @@ class _MainFormState extends State<MainForm> {
     return TextFormField(
       validator: (val) {
         if (val.isEmpty) {
-          return 'Name can\'t be blank';
+          return getTranslated(context, 'required_field');
         }
         return null;
       },
@@ -131,8 +132,8 @@ class _MainFormState extends State<MainForm> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        labelText: 'Name',
-        hintText: 'Enter your name',
+        labelText: getTranslated(context, 'name'),
+        hintText: getTranslated(context, 'name_hint'),
       ),
     );
   }

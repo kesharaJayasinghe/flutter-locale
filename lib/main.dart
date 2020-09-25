@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_locale/localization/app_localization.dart';
 
+import 'package:flutter_locale/localization/app_localization.dart';
+import 'package:flutter_locale/localization/constants.dart';
 import 'package:flutter_locale/routes/custom_router.dart';
 import 'package:flutter_locale/routes/route_names.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,6 +11,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
   static void setLocale(BuildContext context, Locale locale) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
     state.setLocale(locale);
@@ -29,39 +31,57 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void didChangeDependencies() {
+    getLocale().then((locale) {
+      setState(() {
+        this._locale = locale;
+      });
+    });
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: _locale,
-      localizationsDelegates: [
-        AppLocalization.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', 'US'),
-        const Locale('si', 'LK'),
-        const Locale('hi', 'IN'),
-        const Locale('ar', 'AE'),
-        const Locale('fr', 'FR')
-      ],
-      localeResolutionCallback: (deviceLocale, supportedLocales) {
-        for (var locale in supportedLocales) {
-          if (locale.languageCode == deviceLocale.languageCode &&
-              locale.countryCode == deviceLocale.countryCode) {
-            return deviceLocale;
+    if (this._locale == null) {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return MaterialApp(
+        locale: _locale,
+        localizationsDelegates: [
+          AppLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', 'US'),
+          const Locale('si', 'LK'),
+          const Locale('hi', 'IN'),
+          const Locale('ar', 'AE'),
+          const Locale('fr', 'FR')
+        ],
+        localeResolutionCallback: (deviceLocale, supportedLocales) {
+          for (var locale in supportedLocales) {
+            if (locale.languageCode == deviceLocale.languageCode &&
+                locale.countryCode == deviceLocale.countryCode) {
+              return deviceLocale;
+            }
           }
-        }
-        return supportedLocales.first;
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Locale',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      onGenerateRoute: CustomRouter.allRoutes,
-      initialRoute: homeRoute,
-    );
+          return supportedLocales.first;
+        },
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Locale',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        onGenerateRoute: CustomRouter.allRoutes,
+        initialRoute: homeRoute,
+      );
+    }
   }
 }
