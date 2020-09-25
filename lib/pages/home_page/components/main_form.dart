@@ -2,15 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MainForm extends StatefulWidget {
+  final Key formKey;
+
+  MainForm({Key key, @required this.formKey});
+
   @override
   _MainFormState createState() => _MainFormState();
 }
 
 class _MainFormState extends State<MainForm> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   String username;
   String email;
   DateTime _selectedDate;
+
+  void _showsuccessDialog() {
+    showTimePicker(context: context, initialTime: TimeOfDay.now());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,7 @@ class _MainFormState extends State<MainForm> {
       child: Container(
         padding: EdgeInsets.all(20),
         child: Form(
-          key: _formKey,
+          key: _key,
           child: Column(
             children: [
               Container(
@@ -70,7 +79,11 @@ class _MainFormState extends State<MainForm> {
                 height: 50,
                 shape: StadiumBorder(),
                 color: Theme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: () {
+                  if (_key.currentState.validate()) {
+                    _showsuccessDialog();
+                  }
+                },
                 child: Center(
                   child: Text(
                     'Proceed',
