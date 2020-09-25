@@ -66,7 +66,8 @@ class _MainFormState extends State<MainForm> {
                 },
               ),
               SizedBox(height: 24),
-              FlatButton(
+              MaterialButton(
+                height: 50,
                 shape: StadiumBorder(),
                 color: Theme.of(context).primaryColor,
                 onPressed: () {},
