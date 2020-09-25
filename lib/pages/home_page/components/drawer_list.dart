@@ -10,14 +10,14 @@ class DrawerList extends StatefulWidget {
 class _DrawerListState extends State<DrawerList> {
   TextStyle _textStyle = TextStyle(
     color: Colors.white,
-    fontSize: 24,
+    fontSize: 20,
   );
 
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
     return ListTile(
       leading: Icon(
         icon,
-        size: 30,
+        size: 28,
         color: Colors.white60,
       ),
       title: Text(

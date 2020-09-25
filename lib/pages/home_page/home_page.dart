@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_locale/routes/route_names.dart';
-import 'package:flutter_locale/widgets/drawer_list.dart';
+import 'package:flutter_locale/pages/home_page/components/drawer_list.dart';
+import 'package:flutter_locale/pages/home_page/components/main_form.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,12 +21,7 @@ class _HomePageState extends State<HomePage> {
         //     }),
       ),
       drawer: DrawerList(),
-      body: Center(
-        child: Text(
-          'Flutter Locale',
-          style: TextStyle(fontSize: 18),
-        ),
-      ),
+      body: MainForm(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_locale/routes/custom_router.dart';
 import 'package:flutter_locale/routes/route_names.dart';
 
