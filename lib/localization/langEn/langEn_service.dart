@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+// import 'package:flutter/rendering.dart';
+// import 'package:flutter_locale/localization/app_localization.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +18,12 @@ List<LangEn> readFile(File file) {
     print(e.toString());
     return List<LangEn>();
   }
+}
+
+String lang = 'en';
+void setLanguage(String code) {
+  lang = code;
+  print('Language $lang');
 }
 
 void writeFile(Map<String, dynamic> arg) =>
@@ -61,7 +69,7 @@ class LangServices {
 
   Future<File> _createFile() async {
     Directory tempDir = await getTemporaryDirectory();
-    // print(tempDir.path);
+    print(tempDir.path);
     return File('${tempDir.path}/Data.json');
   }
 

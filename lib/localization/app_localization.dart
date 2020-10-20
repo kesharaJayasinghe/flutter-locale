@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_locale/localization/langEn/langEn_service.dart';
 
 class AppLocalization {
   final Locale locale;
@@ -17,6 +18,8 @@ class AppLocalization {
   Future load() async {
     String jsonStringValues =
         await rootBundle.loadString('lib/lang/${locale.languageCode}.json');
+    // print(locale.languageCode);
+    setLanguage(locale.languageCode);
     Map<String, dynamic> mappedJson = json.decode(jsonStringValues);
     _localizedValues =
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
