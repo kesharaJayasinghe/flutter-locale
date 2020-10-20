@@ -67,7 +67,10 @@ class _DrawerListState extends State<DrawerList> {
             buildListTile(getTranslated(context, 'settings'), Icons.settings,
                 () {
               Navigator.popAndPushNamed(context, settingsPage);
-            })
+            }),
+            buildListTile('Load Data', Icons.get_app, () {
+              Navigator.popAndPushNamed(context, loadDataPage);
+            }),
           ],
         ),
       ),
